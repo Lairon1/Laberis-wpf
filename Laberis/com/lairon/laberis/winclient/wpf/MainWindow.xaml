@@ -1,0 +1,45 @@
+﻿<Window x:Class="Laberis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Laberis"
+        Height="600" Width="1000"
+        WindowState="Maximized">
+
+    <Grid>
+        <Frame
+            Background="#ffdadada"
+            Name="MainFrame"
+            NavigationUIVisibility="Hidden" />
+        <StackPanel
+            Name="NotificationStackPanel">
+
+            <!-- <Border -->
+            <!--     MinWidth="400" -->
+            <!--     MaxWidth="400" -->
+            <!--     MinHeight="110" -->
+            <!--     Margin="15" -->
+            <!--     Background="White" -->
+            <!--     VerticalAlignment="Top" -->
+            <!--     HorizontalAlignment="Right" -->
+            <!--     Padding="30" -->
+            <!--     CornerRadius="20"> -->
+            <!--     <StackPanel> -->
+            <!--         <TextBlock -->
+            <!--             Text="Ошибка" -->
+            <!--             FontSize="15" -->
+            <!--             FontWeight="Bold" -->
+            <!--             Foreground="Red"/> -->
+            <!--         <TextBlock -->
+            <!--             TextWrapping="Wrap" -->
+            <!--             Text="" -->
+            <!--             FontSize="15" -->
+            <!--             Margin="0 10 0 0"/> -->
+            <!--     </StackPanel> -->
+            <!-- </Border> -->
+        </StackPanel>
+
+    </Grid>
+</Window>
