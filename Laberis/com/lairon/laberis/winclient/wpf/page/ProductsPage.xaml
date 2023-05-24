@@ -6,67 +6,83 @@
 
       mc:Ignorable="d"
       Title="ProductsPage">
+    <Page.Resources>
+        <Style TargetType="Image" x:Key="ImageButton">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 0 30 0" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.01"
+                                Storyboard.TargetProperty="Width"
+                                To="55" />
+                            <DoubleAnimation
+                                Duration="0:0:0.01"
+                                Storyboard.TargetProperty="Height"
+                                To="55" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Width"
+                                To="60" />
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Height"
+                                To="60" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
-
-    <StackPanel>
-        <Grid>
-            <Border
-                MinHeight="100"
-                Margin="15"
-                Background="White"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Padding="30"
-                CornerRadius="20">
-                <Border.Effect>
-                    <DropShadowEffect
-                        BlurRadius="30"
-                        Color="LightGray"
-                        ShadowDepth="0" />
-                </Border.Effect>
-                <Grid>
-                    <StackPanel />
-
-                </Grid>
-            </Border>
-            <Border
-                MinHeight="70"
-                Margin="15"
-                Background="White"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                CornerRadius="20">
-                <Border.Effect>
-                    <DropShadowEffect
-                        BlurRadius="30"
-                        Color="LightGray"
-                        ShadowDepth="0" />
-                </Border.Effect>
-                <Grid>
-                    <Button
-                        MinHeight="70"
-                        MinWidth="60"
-                        Click="AccountButtonClick"
-                        Style="{StaticResource MaterialDesignIconButton}">
-
-                        <Image
-                            Height="50"
-                            Source="/resources/image/user.png" />
-
-                    </Button>
-
-                </Grid>
-            </Border>
-        </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
 
         <Border
-            MinWidth="600"
-            MinHeight="400"
+            Grid.Row="0"
             Margin="15"
             Background="White"
-            VerticalAlignment="Center"
             Padding="30"
-            CornerRadius="20">
+            CornerRadius="5">
             <Border.Effect>
                 <DropShadowEffect
                     BlurRadius="30"
@@ -74,10 +90,165 @@
                     ShadowDepth="0" />
             </Border.Effect>
 
-            <StackPanel />
+            <StackPanel
+                Orientation="Horizontal">
+                <Image
+                    MouseUp="profileButtonClick"
+                    Source="/resources/image/user.png"
+                    Style="{StaticResource ImageButton}" />
+                <Image
+                    Source="/resources/image/edit.png"
+                    Style="{StaticResource ImageButton}"
+                    MouseUp="editProductButtonClick"/>
+                <Image
+                    Source="/resources/image/create.png"
+                    MouseUp="createProductButtonClick"
+                    Style="{StaticResource ImageButton}" />
+                <Image
+                    Source="/resources/image/reload.png"
+                    MouseUp="reloadButtonClick"
+                    Style="{StaticResource ImageButton}" />
+                <Image
+                    Source="/resources/image/delete.png"
+                    MouseUp="deletButtonClick"
+                    Style="{StaticResource ImageButton}" />
+            </StackPanel>
 
         </Border>
-    </StackPanel>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="15"
+            Background="White"
+            Padding="30"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="30"
+                    Color="LightGray"
+                    ShadowDepth="0" />
+            </Border.Effect>
+
+            <StackPanel
+                Orientation="Vertical">
+                <TextBlock Text="Поиск" Margin="0 0 0 15" />
+                <TextBox Margin="0 0 0 30" Name="SearchBox" TextChanged="SearchBox_OnTextChanged" />
+                <TextBlock Text="Сортировка" Margin="0 0 0 15" />
+                <ComboBox Margin="0 0 0 30" Name="SortBox" SelectionChanged="SortBox_OnSelectionChanged" />
+                <TextBlock Text="Фильтрация" Margin="0 0 0 15" />
+                <ComboBox Margin="0 0 0 30" Name="FillterComboBox"
+                          SelectionChanged="FillterComboBox_OnSelectionChanged" />
+            </StackPanel>
+
+        </Border>
+
+
+        <Border
+            Grid.Row="1"
+            Margin="15"
+            Background="White"
+            Padding="30"
+            CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="30"
+                    Color="LightGray"
+                    ShadowDepth="0" />
+            </Border.Effect>
+
+            <ListView
+                x:Name="ProductsListView"
+                ItemsSource="{Binding viewedProducts}"
+                MouseDoubleClick="ProductsListView_OnMouseDoubleClick">
+                <ListView.Resources>
+                    <ContextMenu x:Key="ItemContextMenu">
+                        <MenuItem Header="Удалить" Click="deleteContextMenuButtonClick">
+                            <MenuItem.Icon>
+                                <Image Source="/resources/image/delete.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Редактировать" Click="editProductContextMenuButtonClick">
+                            <MenuItem.Icon>
+                                <Image Source="/resources/image/edit.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Подробнее" />
+                    </ContextMenu>
+                </ListView.Resources>
+
+
+                <ListView.ItemContainerStyle>
+                    <Style
+                        TargetType="ListViewItem">
+                        <Setter
+                            Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+                        <Border
+                            Background="#ffff"
+                            CornerRadius="5"
+                            BorderThickness="1"
+                            BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Width="150"
+                                    Source="{Binding image}" />
+                                <StackPanel
+                                    Grid.Column="1">
+                                    <TextBlock
+                                        Text="{Binding titleWithType}"
+                                        TextWrapping="Wrap"
+                                        FontWeight="Bold"
+                                        FontSize="20"
+                                        Margin="30 10 0 30" />
+                                    <TextBlock
+                                        Text="{Binding descriptionCutted}"
+                                        TextWrapping="Wrap"
+                                        Margin="30 0 0 20"
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Left"
+                                        FontSize="15" />
+                                    <TextBlock
+                                        Text="Подробнее..."
+                                        Margin="30 0 0 20"
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Left"
+                                        FontSize="15"
+                                        Foreground="DodgerBlue" />
+                                </StackPanel>
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Text="{Binding priceFormated}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="30 10 30 0"
+                                    FontSize="20"
+                                    FontWeight="Bold" />
+
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Border>
+    </Grid>
 
 
 </Page>

@@ -49,6 +49,7 @@ namespace Laberis.com.lairon.laberis.winclient.wpf.login
                 User user = await Application.LaberisServer.Login(login, password);
                 Application.User = user;
                 Application.MainWindow.sendInfo("Успешная авторизация!");
+                Configuration.saveCurrentUser(user);
                 Application.MainWindow.changePage(new ProductsPage());
             }
             catch (Exception exception)
@@ -70,7 +71,7 @@ namespace Laberis.com.lairon.laberis.winclient.wpf.login
                 }
                 else
                     Application.MainWindow.sendError(
-                        "Сервер в данное время недоступен. Пожалуйста попробуйте позже. ");
+                        "Сервер в данное время недоступен. Пожалуйста попробуйте позже. " + exception.Message);
             }
             finally
             {

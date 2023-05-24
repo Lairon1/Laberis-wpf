@@ -1,0 +1,99 @@
+﻿<Page x:Class="Laberis.com.lairon.laberis.winclient.wpf.page.SaveCreateProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      Title="CreateProductPage"
+      MinHeight="500"
+      MinWidth="1000">
+    <Border
+        Margin="15"
+        Background="White"
+        Padding="30"
+        CornerRadius="5">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="30"
+                Color="LightGray"
+                ShadowDepth="0" />
+        </Border.Effect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer
+                Grid.Column="0">
+                <StackPanel>
+                    <TextBox Name="TitleTextBox" Margin="15" materialDesign:HintAssist.Hint="Имя" />
+                    <TextBox Name="DescriptionTextBox" Margin="15" materialDesign:HintAssist.Hint="Описание"
+                             TextWrapping="Wrap" AcceptsReturn="True" />
+                    <TextBox Name="PriceTextBox" Margin="15" materialDesign:HintAssist.Hint="Цена" />
+                    <ComboBox Name="TypeComboBox" Margin="15" materialDesign:HintAssist.Hint="Тип" />
+                    <TextBox Name="SpecificationsTextBox" Margin="15" materialDesign:HintAssist.Hint="Характеристики"
+                             TextWrapping="Wrap" AcceptsReturn="True" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Button
+                            Click="cancelButtonClick"
+                            Content="Отмена"
+                            Margin="15"
+                            Style="{StaticResource MaterialDesignFlatButton}" />
+                        <Button
+                            Click="saveButtonClick"
+                            Grid.Column="1"
+                            Content="Сохранить"
+                            Margin="15" />
+                        <Button
+                            Click="previewButtonClick"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Content="Предпросмотр"
+                            Margin="15"
+                            Style="{StaticResource MaterialDesignFlatButton}" />
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border
+                Grid.Column="1"
+                Margin="15"
+                Background="White"
+                Padding="30"
+                CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="30"
+                        Color="LightGray"
+                        ShadowDepth="0" />
+                </Border.Effect>
+                <StackPanel>
+                    <Image
+                        MaxWidth="300"
+                        Source="/resources/image/default.png"
+                        Name="ProductImage" />
+
+                    <Button
+                        Click="setImageButtonClick"
+                        Margin="15"
+                        Content="Выбрать картинку" />
+
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+
+    </Border>
+
+</Page>

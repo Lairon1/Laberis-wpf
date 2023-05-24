@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Laberis.com.lairon.laberis.data;
 using Laberis.com.lairon.laberis.server;
+using Laberis.com.lairon.laberis.server.model;
 using Laberis.com.lairon.laberis.winclient.wpf.login;
+using Laberis.com.lairon.laberis.winclient.wpf.page;
 using Application = Laberis.com.lairon.laberis.winclient.Application;
 
 namespace Laberis
@@ -25,26 +30,53 @@ namespace Laberis
             Application.MainWindow = this;
             try
             {
-                Application.LaberisServer = new LaberisServer("http://localhost:8080");
+                Application.LaberisServer = new RestAPIDataProvider("http://localhost:8080");
             }
             catch(Exception)
             {
                 sendError("Сервер в данное время недоступен. Пожалуйста попробуйте позже");
             }
-
-            LoginPage loginPage = new LoginPage();
-            MainFrame.Content = loginPage;
-            currentPage = loginPage;
             
+            
+            loadPage();
+        }
+
+        private async void loadPage()
+        {
+            User user = Configuration.loadCurrentUser();
+            if (user == null)
+            {
+                currentPage = new LoginPage();
+            }
+            else
+            {
+                bool session = await Application.LaberisServer.checkSession(user);
+                if (session)
+                {
+                    Application.User = user;
+
+                    currentPage = new ProductsPage();
+                    sendInfo("Добро пожаловать " + user.firstname + " " + user.lastname);
+                }
+                else
+                {
+                    currentPage = new LoginPage();
+                    Configuration.saveCurrentUser(null);
+                    sendError("К сожелению время вашей сессии закончилось, пожалуйста войдите еще раз.");
+                }
+            }
+            
+            MainFrame.Content = currentPage;
+
             DoubleAnimation opacityAnimationFrom = new DoubleAnimation();
             opacityAnimationFrom.From = 0f;
             opacityAnimationFrom.To = 1;
             opacityAnimationFrom.Duration = TimeSpan.FromSeconds(3);
             opacityAnimationFrom.EasingFunction = new QuadraticEase();
             
-            loginPage.BeginAnimation(OpacityProperty, opacityAnimationFrom);
+            currentPage.BeginAnimation(OpacityProperty, opacityAnimationFrom);
         }
-
+        
         public async void changePage(Page page)
         {
             MainFrame.IsHitTestVisible = false;
@@ -162,5 +194,31 @@ namespace Laberis
             sendNotification("Предупреждение", Brushes.Orange, warning, SystemSounds.Beep);
 
         public void sendError(string error) => sendNotification("Ошибка", Brushes.Red, error, SystemSounds.Beep);
+
+        private void DragWin(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            DragMove();
+        }
+
+        private void CloseButtonClick(object sender, MouseButtonEventArgs e) => Close();
+
+        private void MinButtonClick(object sender, MouseButtonEventArgs e) => WindowState = WindowState.Minimized;
+
+        private void MaxWindowButtonClick(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                return;                
+            }
+
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+                return;
+            }
+        }
     }
 }

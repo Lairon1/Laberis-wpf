@@ -62,6 +62,7 @@ namespace Laberis.com.lairon.laberis.winclient.wpf.page
                 User user = await Application.LaberisServer.Register(new User(login, firstname, lastname, null, password));
                 Application.MainWindow.sendInfo("Регистрация успешно завершена!");
                 Application.User = user;
+                Configuration.saveCurrentUser(user);
                 Application.MainWindow.changePage(new ProductsPage());
             }
             catch (Exception ex)

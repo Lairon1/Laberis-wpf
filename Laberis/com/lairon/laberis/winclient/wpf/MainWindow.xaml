@@ -6,40 +6,208 @@
         mc:Ignorable="d"
         Title="Laberis"
         Height="600" Width="1000"
-        WindowState="Maximized">
-
+        WindowState="Normal"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    <!-- <WindowChrome.WindowChrome> -->
+    <!--     <WindowChrome /> -->
+    <!-- </WindowChrome.WindowChrome> -->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid
+                MouseDown="DragWin"
+                Background="White" />
+            <StackPanel
+                Grid.Column="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+
+
+                <Ellipse
+                    Fill="Purple"
+                    Width="15"
+                    Height="15"
+                    Opacity="0.3"
+                    Margin="10 0 10 0"
+                    MouseUp="MinButtonClick">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.5" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="17" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="17" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.3" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="15" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="15" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Ellipse
+                    Fill="Yellow"
+                    Width="15"
+                    Height="15"
+                    Opacity="0.3"
+                    Margin="0 0 10 0"
+                    MouseUp="MaxWindowButtonClick">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.5" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="17" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="17" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.3" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="15" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="15" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <Ellipse
+                    Fill="Red"
+                    Width="15"
+                    Height="15"
+                    Opacity="0.3"
+                    Margin="0 0 10 0"
+                    MouseLeftButtonUp="CloseButtonClick"
+                    IsHitTestVisible="True">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.5" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="17" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="17" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0.3" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Height"
+                                                    To="15" />
+                                                <DoubleAnimation
+                                                    Duration="0:0:0.1"
+                                                    Storyboard.TargetProperty="Width"
+                                                    To="15" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+
+
+            </StackPanel>
+
+        </Grid>
+
         <Frame
+            Grid.Row="1"
             Background="#ffdadada"
             Name="MainFrame"
             NavigationUIVisibility="Hidden" />
         <StackPanel
-            Name="NotificationStackPanel">
-
-            <!-- <Border -->
-            <!--     MinWidth="400" -->
-            <!--     MaxWidth="400" -->
-            <!--     MinHeight="110" -->
-            <!--     Margin="15" -->
-            <!--     Background="White" -->
-            <!--     VerticalAlignment="Top" -->
-            <!--     HorizontalAlignment="Right" -->
-            <!--     Padding="30" -->
-            <!--     CornerRadius="20"> -->
-            <!--     <StackPanel> -->
-            <!--         <TextBlock -->
-            <!--             Text="Ошибка" -->
-            <!--             FontSize="15" -->
-            <!--             FontWeight="Bold" -->
-            <!--             Foreground="Red"/> -->
-            <!--         <TextBlock -->
-            <!--             TextWrapping="Wrap" -->
-            <!--             Text="" -->
-            <!--             FontSize="15" -->
-            <!--             Margin="0 10 0 0"/> -->
-            <!--     </StackPanel> -->
-            <!-- </Border> -->
-        </StackPanel>
+            Grid.Row="1"
+            Name="NotificationStackPanel" />
 
     </Grid>
 </Window>

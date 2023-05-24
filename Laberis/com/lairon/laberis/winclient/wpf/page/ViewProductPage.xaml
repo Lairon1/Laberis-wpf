@@ -1,0 +1,221 @@
+﻿<Page x:Class="Laberis.com.lairon.laberis.winclient.wpf.page.ViewProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="ViewProductPage">
+    <Page.Resources>
+        <Style TargetType="Image" x:Key="ImageButton">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="0 0 30 0" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.01"
+                                Storyboard.TargetProperty="Width"
+                                To="25" />
+                            <DoubleAnimation
+                                Duration="0:0:0.01"
+                                Storyboard.TargetProperty="Height"
+                                To="25" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Width"
+                                To="30" />
+                            <DoubleAnimation
+                                Duration="0:0:0.1"
+                                Storyboard.TargetProperty="Height"
+                                To="30" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Border
+        Margin="15"
+        Background="White"
+        Padding="30"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        CornerRadius="5">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="30"
+                Color="LightGray"
+                ShadowDepth="0" />
+        </Border.Effect>
+        <ScrollViewer>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image
+                    Source="/resources/image/back.png"
+                    Style="{StaticResource ImageButton}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    MouseUp="previousPageButtonClick" />
+
+                <Image
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Source="{Binding product.image}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="15" />
+
+
+                <StackPanel
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+
+                    <TextBlock
+
+                        Text="{Binding product.titleWithType}"
+                        TextWrapping="Wrap"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        Margin="15" />
+
+                    <Border
+                        Margin="15"
+                        Background="White"
+                        Padding="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="30"
+                                Color="LightGray"
+                                ShadowDepth="0" />
+                        </Border.Effect>
+
+                        <StackPanel
+                            Margin="10 0 0 0">
+                            <TextBlock
+                                Text="Описание"
+                                FontSize="20"
+                                FontWeight="Bold"
+                                Margin="0 10 0 30" />
+                            <TextBlock
+                                Text="{Binding product.descriptionCutted}"
+                                TextWrapping="Wrap"
+                                MaxWidth="1000"
+                                HorizontalAlignment="Left"
+                                FontSize="15"
+                                Name="DescriptionText" />
+                            <Button
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Развернуть 🢃"
+                                Click="DescriptionCollapseButtonClick"
+                                Name="DescriptionCollapseButton" />
+
+
+                        </StackPanel>
+
+                    </Border>
+
+
+                    <Border
+                        Margin="15"
+                        Background="White"
+                        Padding="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="30"
+                                Color="LightGray"
+                                ShadowDepth="0" />
+                        </Border.Effect>
+                        
+                        <StackPanel
+                            Margin="10 0 0 0">
+                            <TextBlock
+                                Text="Характеристики"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                Margin="0 10 0 30" />
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <TextBlock
+                                    Text="{Binding product.specificationsKeysText}"
+                                    TextWrapping="Wrap"
+                                    MaxWidth="1000"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    FontSize="15" />
+                                <TextBlock
+                                    Text="{Binding product.specificationsValuesText}"
+                                    TextWrapping="Wrap"
+                                    MaxWidth="1000"
+                                    HorizontalAlignment="Left"
+                                    FontSize="15"
+                                    Margin="40 0 0 0" />
+                            </StackPanel>
+
+                        </StackPanel>
+                        
+                    </Border>
+                   
+
+                </StackPanel>
+
+                <TextBlock
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Text="{Binding product.priceFormated}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="30 10 30 0"
+                    FontSize="20"
+                    FontWeight="Bold" />
+
+
+            </Grid>
+        </ScrollViewer>
+    </Border>
+</Page>

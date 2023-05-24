@@ -1,20 +1,14 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Laberis.com.lairon.laberis.server.model
 {
     public class User
     {
-        [JsonInclude]
-        public string login { get; set; }
-        [JsonInclude]
-        public string firstname { get; set; }
-        [JsonInclude]
-        public string lastname { get; set; }
-        [JsonInclude]
-        public string token { get; set; }
-        [JsonInclude]
-        public string password { get; set; }
+        [JsonInclude] public string login { get; set; }
+        [JsonInclude] public string firstname { get; set; }
+        [JsonInclude] public string lastname { get; set; }
+        [JsonInclude] public string token { get; set; }
+        [JsonInclude] public string password { get; set; }
 
         public User(string login, string firstname, string lastname, string token, string password)
         {
